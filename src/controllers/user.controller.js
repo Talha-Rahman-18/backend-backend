@@ -137,20 +137,17 @@ const options={
   httpOnly:true,
   secure:true,
   sameSite: "none",
-  path: "/"
+  maxAge: 7 * 24 * 60 * 60 * 1000
 }
 
 return res.status(200)
 .cookie("accessToken",accessToken,{
- ...options,
-  // maxAge:3 * 60 * 60 * 1000
-  maxAge:1 * 1000
+ httpOnly:true,
+  secure:true,
+  sameSite: "none",
+  maxAge:3 * 60 * 60 * 1000
 })
-.cookie("refreshToken",refreshToken,{
-  ...options,
-    maxAge: 7 * 24 * 60 * 60 * 1000
-
-})
+.cookie("refreshToken",refreshToken,options)
 .json(
   new ApiResponse(200,{
     user: loggedInUser,accessToken,refreshToken
@@ -192,6 +189,7 @@ const  refreshAccessToken= asyncHandler(async(req,res)=>{
 
   const incomingRefreshToken= req.cookies.refreshToken || req.body.refreshToken
   console.log("ref",incomingRefreshToken)
+
   if(!incomingRefreshToken){
     throw new ApiError(401,"unauthorized request");
   }
@@ -214,18 +212,18 @@ try {
   const options={
     httpOnly:true,
     secure:true,
-     sameSite: "none",
-    maxAge: 7 * 24 * 60 * 60 * 1000
-
+    sameSite: "none",
+    maxAge:7 * 24 * 60 * 60 * 1000
   }
   
   const {accessToken,newRefreshToken}=await generateAccessAndRefreshTokens(user._id);
   
   return res.status(200)
   .cookie("accessToken",accessToken,{
-    httpOnly:true,
+   httpOnly:true,
   secure:true,
-    maxAge:3 * 60 * 60 * 1000
+  sameSite: "none",
+  maxAge:3 * 60 * 60 * 1000
   })
   .cookie("refreshToken",newRefreshToken,options)
   .json(
