@@ -147,7 +147,7 @@ return res.status(200)
  httpOnly:true,
   secure:true,
   sameSite: "none",
-  maxAge:3 * 60 * 60 * 1000
+  maxAge:24 * 60 * 60 * 1000
 })
 .cookie("refreshToken",refreshToken,options)
 .json(
