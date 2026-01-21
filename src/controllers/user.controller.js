@@ -14,6 +14,9 @@ try {
   const accessToken=user.generateAccessToken();
   const refreshToken=user.generateRefreshToken();
 
+  console.log("access::",accessToken)
+    console.log("reff",refreshToken)
+
 
 user.refreshToken=refreshToken;
  await user.save({validateBeforeSave: false});//it dont validate any field before save the refresh token
@@ -225,7 +228,6 @@ try {
   await user.save({validateBeforeSave:false})
 
   console.log("DB REFRESH TOKEN:", user.refreshToken);
-console.log("INCOMING REFRESH TOKEN:", incomingRefreshToken);
   
   return res.status(200)
   .cookie("accessToken",accessToken,{
