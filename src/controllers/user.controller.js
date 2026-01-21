@@ -218,6 +218,12 @@ try {
   }
   
   const {accessToken,newRefreshToken}=await generateAccessAndRefreshTokens(user._id);
+
+  user.refreshToken = newRefreshToken;
+  await user.save({validateBeforeSave:false})
+
+  console.log("DB REFRESH TOKEN:", user.refreshToken);
+console.log("INCOMING REFRESH TOKEN:", incomingRefreshToken);
   
   return res.status(200)
   .cookie("accessToken",accessToken,{
