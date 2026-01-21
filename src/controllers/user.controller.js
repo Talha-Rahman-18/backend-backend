@@ -219,6 +219,8 @@ try {
   
   const {accessToken,newRefreshToken}=await generateAccessAndRefreshTokens(user._id);
 
+  console.log(newRefreshToken)
+
   user.refreshToken = newRefreshToken;
   await user.save({validateBeforeSave:false})
 
