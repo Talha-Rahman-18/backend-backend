@@ -100,6 +100,8 @@ const loginUser=asyncHandler( async (req,res)=>{
   
   //get data
   const {email,username,password}=req.body
+
+  console.log(email)
   
   //check if username or email
   if(!username && !email){
