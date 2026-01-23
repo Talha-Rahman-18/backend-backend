@@ -44,7 +44,13 @@ const registerUser = asyncHandler( async (req,res)=>{
   const existedUser= await User.findOne({
     $or:[{ email },{ username }]
   });
-  if(existedUser){throw new ApiError(409,"User with this eamil or username already exist")}
+  
+  if(existedUser){
+
+    res.status(401).json("User with this eamil or username already exist");
+throw new ApiError(401,"User with this eamil or username already exist")
+
+  }
   
   //check avatar and bcg image
   const avatarLocalPath=  req.files?.avatar[0]?.path;
