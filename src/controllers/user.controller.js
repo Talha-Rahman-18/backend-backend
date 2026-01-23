@@ -96,7 +96,9 @@ throw new ApiError(401,"User with this eamil or username already exist")
     
 //check user created?
 if(!createdUser){
+  res.status(502).json("something went wrong try again");
   throw new ApiError(502,"something went wrong while registering user");
+
 }
 
 //return res
@@ -138,7 +140,7 @@ const isPasswordValid =await user.isPasswordCorrect(password);
 
 
 if(!isPasswordValid){
-  res.status(401).json("Password incorrect");
+  res.status(401).json("Password is incorrect");
   throw new ApiError(401,"password incorrect");
   
 }
