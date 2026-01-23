@@ -38,6 +38,10 @@ const registerUser = asyncHandler( async (req,res)=>{
     
   };
   
+if(password?.trim() < 6){
+  res.status(400).json("Password must be atleast 6 characters");
+}
+
   //check if have a prev account at the data
   const existedUser= await User.findOne({
     $or:[{ email },{ username }]
