@@ -31,6 +31,8 @@ catch (error) {
 }
 }
 
+
+//DELETE CLOUDINARY
 const deleteCloudinary=async(image)=>{
    try {
         if (!image) {
