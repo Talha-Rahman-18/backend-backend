@@ -117,9 +117,10 @@ return res.status(201).json(
 //login controller//
 const loginUser=asyncHandler( async (req,res)=>{
   
-  
+  console.log("user,hit")
   //get data
   const {email,username,password}=req.body
+  console.log(req.body);
 
   
   //check if username or email
