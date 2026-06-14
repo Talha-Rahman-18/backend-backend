@@ -5,8 +5,7 @@ import cookieParser from 'cookie-parser';
 const app=express();
 
 app.use(cors({
-    origin:["tuminol.vercel.app" 
-    ],
+    origin:"https://tuminol.vercel.app" ,
     credentials:true
 
 }))
